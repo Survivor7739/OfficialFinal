@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         wallrunning,
         climbing,
         crouching,
-        air
+        air 
     }
 
     public bool wallrunning;
