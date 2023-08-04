@@ -276,11 +276,7 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<GameManager>().setCountText(PickUpCount);
             collision.gameObject.SetActive(false);
         }
-        else if (collision.gameObject.CompareTag("Enemy")) // If the player hits an enemy...
-        {
-            gameObject.SetActive(false); //Despawn the player
-            FindObjectOfType<GameManager>().EndGame(); //Tell the Game Manager to reset the level
-        }
+        
 
 
 }    }

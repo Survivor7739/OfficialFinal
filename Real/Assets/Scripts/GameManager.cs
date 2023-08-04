@@ -10,27 +10,19 @@ public class GameManager : MonoBehaviour
     //private int pickUpCount;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    public GameObject loseTextObject;
+   
     #endregion
     #region Game State Variables
-    bool gameHasEnded = false;
+    
     public float restartDelay = 2f;
     #endregion
 
     private void Start()
     {
         winTextObject.SetActive(false);
-        loseTextObject.SetActive(false);
+        
     }
-    public void EndGame()
-    {
-        if (gameHasEnded == false)
-        {
-            gameHasEnded = true;
-            loseTextObject.SetActive(true);
-            Invoke("Restart", restartDelay);
-        }
-    }
+    
 
     void Restart()
     {
@@ -43,5 +35,10 @@ public class GameManager : MonoBehaviour
         {
             winTextObject.SetActive(true);
         }
+
+        
     }
+
+
+
 }
