@@ -8,6 +8,9 @@ public class PlayerCam : MonoBehaviour
     public float sensX;
     public float sensY;
 
+    private int PickUpCount;
+    private int count;
+
     public Transform orientation;
     public Transform camHolder;
 
@@ -51,4 +54,23 @@ public class PlayerCam : MonoBehaviour
         transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
     }
 
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Pick Up"))
+        {
+            Destroy(collision.gameObject);
+            PickUpCount += 1;
+            FindObjectOfType<GameManager>().setCountText(PickUpCount);
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("Enemy")) // If the player hits an enemy...
+        {
+            gameObject.SetActive(false); //Despawn the player
+            FindObjectOfType<GameManager>().EndGame(); //Tell the Game Manager to reset the level
+        }
+    }
 }
+
+
+

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private int PickUpCount;
+    private int count;
+
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
@@ -264,7 +267,23 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(Direction, slopeHit.normal).normalized;
     }
 
-}
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Pick Up"))
+        {
+            Destroy(collision.gameObject);
+            PickUpCount += 1;
+            FindObjectOfType<GameManager>().setCountText(PickUpCount);
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("Enemy")) // If the player hits an enemy...
+        {
+            gameObject.SetActive(false); //Despawn the player
+            FindObjectOfType<GameManager>().EndGame(); //Tell the Game Manager to reset the level
+        }
+
+
+}    }
 
 
 
